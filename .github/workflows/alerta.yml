@@ -1,0 +1,25 @@
+
+name: Notificacion DevOps ITLA
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notificacion:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Ejecutar Hola Mundo
+        run: echo "Hola Mundo desde GitHub Actions!"
+
+      - name: Enviar notificacion a ntfy
+        run: |
+          curl --fail --show-error \
+            -H "Title: Practica DevOps ITLA" \
+            -d "Hola Mundo! Se subieron cambios a la rama main del repositorio ${{ github.repository }}" \
+            https://ntfy.sh/devops-itla
